@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production gatsby build",
+    "clean": "gatsby clean",
     "develop": "NODE_ENV=development gatsby develop",
+    "info": "gatsby info",
+    "repl": "gatsby repl",
+    "serve": "NODE_ENV=production gatsby serve",
+    "telemetry": "gatsby telemetry",
     "test": "jest"
   },
   "repository": {
