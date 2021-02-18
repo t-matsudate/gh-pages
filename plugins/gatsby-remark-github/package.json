@@ -1,0 +1,20 @@
+{
+  "name": "gatsby-remark-github",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "T. Matsudate.",
+  "license": "MIT",
+  "dependencies": {
+    "remark-github": "^10.0.1"
+  },
+  "devDependencies": {
+    "remark": "^13.0.0"
+  },
+  "peerDependencies": {
+    "remark": "^13.0.0"
+  }
+}

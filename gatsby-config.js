@@ -1,26 +1,16 @@
 const path = require('path')
 const process = require('process')
+const test = require(path.resolve('src', 'components', 'Test'))
 
-let graphqlPlugin = null
-
-if (process.env.NODE_ENV === 'production') {
-  graphqlPlugin = {
-    resolve: "gatsby-source-graphql",
-    options: {
-      typeName: "GitHub",
-      fieldName: "github",
-      url: "https://api.github.com/graphql",
-      headers: {
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
-      }
-    }
-  }
-}
-
-module.exports = {
+let config = {
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        implementation: require("node-sass")
+      }
+    },
     `gatsby-plugin-graphql-codegen`,
     {
       resolve: `gatsby-plugin-typescript`,
@@ -42,8 +32,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `rtmp-reports`,
-        path: `${__dirname}/src/articles/rtmp-reports`
+        name: `articles`,
+        path: `${__dirname}/src/articles/`
       }
     },
     {
@@ -55,83 +45,31 @@ module.exports = {
         gfm: true,
         plugins: [
           {
-            resolve: "@akebifiky/remark-simple-plantuml",
-            options: {
-              baseUrl: "https://www.plantuml.com/plantuml/svg"
-            }
-          },
-          "@fec/remark-a11y-emoji",
-          {
-            resolve: "remark-attr",
+            resolve: "gatsby-remark-autolink-headers",
             options: {}
           },
           {
-            resolve: "remark-autolink-headings",
+            resolve: "gatsby-remark-copy-linked-files",
             options: {}
           },
-          "remark-breaks",
+          "gatsby-remark-graphviz",
           {
-            resolve: "remark-code-extra",
+            resolve: "gatsby-remark-katex",
             options: {}
           },
-          "remark-code-frontmatter",
+          "gatsby-remark-inline-links",
+          "gatsby-remark-gemoji",
           {
-            resolve: "remark-code-import/gatsby",
+            resolve: "gatsby-remark-github",
             options: {}
           },
+          "gatsby-remark-images",
           {
-            resolve: "remark-emoji",
-            options: {}
-          },
-          {
-            resolve: "remark-footnotes",
-            options: {
-              inlineNotes: true
-            }
-          },
-          {
-            resolve: "remark-frontmatter",
-            options: {}
-          },
-          "remark-gemoji",
-          {
-            resolve: "remark-gfm",
+            resolve: "gatsby-remark-plantuml",
             options: {}
           },
           {
-            resolve: "remark-github",
-            options: {}
-          },
-          "remark-heading-id",
-          {
-            resolve: "remark-highlight.js",
-            options: {}
-          },
-          {
-            resolve: "remark-html",
-            options: {}
-          },
-          {
-            resolve: "remark-html-katex",
-            options: {}
-          },
-          "remark-images",
-          "remark-inline-links",
-          "remark-numbered-footnote-labels",
-          {
-            resolve: "remark-oembed",
-            options: {}
-          },
-          {
-            resolve: "remark-react",
-            options: {}
-          },
-          {
-            resolve: "remark-rehype",
-            options: {}
-          },
-          {
-            resolve: "remark-toc",
+            resolve: "gatsby-remark-highlight.js",
             options: {}
           }
         ]
@@ -142,7 +80,24 @@ module.exports = {
       options: {
         jsxPlugins: ["styled-jsx-plugin-sass"]
       }
-    },
-    graphqlPlugin
+    }
   ]
 }
+
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "GitHub",
+        fieldName: "github",
+        url: "https://api.github.com/graphql",
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
+        }
+      }
+    }
+  )
+}
+
+module.exports = config
