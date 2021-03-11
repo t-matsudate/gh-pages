@@ -28,14 +28,14 @@
   - [x] Header
   - [x] Sidebar
   - [x] Main
-- [] index.html
-  - [] Summaries of repository state
-  - [] Links to my blog
-  - [] Tools/Libraries introduction
-  - [] Short explanation why I chose these tools/libraries
-  - [] Motivation to make this site
-  - [] Goals
-  - [] Donation link (PayPal.Me)
-- [] Blog
-  - [] RTMP implementation reports
-  - [] Some other article (To be determined)
+- [ ] index.html
+  - [ ] Summaries of repository state
+  - [ ] Links to my blog
+  - [ ] Tools/Libraries introduction
+  - [ ] Short explanation why I chose these tools/libraries
+  - [ ] Motivation to make this site
+  - [ ] Goals
+  - [ ] Donation link (PayPal.Me)
+- [ ] Blog
+  - [ ] RTMP implementation reports
+  - [ ] Some other article (To be determined)
